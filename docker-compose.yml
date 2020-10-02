@@ -6,9 +6,19 @@ services:
       context: .
       dockerfile: dockerfile-nginx
     volumes:
-      - ./symfony:/var/www/symfony
+      - ./symfony/:/var/www/symfony
     ports:
       - 8000:80
+    networks:
+      - default
+  php:
+    build:
+      context: .
+      dockerfile: dockerfile-php
+    environment:
+      APP_ENV: dev
+    volumes:
+      - ./symfony/:/var/www/symfony
     networks:
       - default
 
