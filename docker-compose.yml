@@ -11,6 +11,7 @@ services:
       - 8000:80
     networks:
       - default
+
   php:
     build:
       context: .
@@ -19,6 +20,18 @@ services:
       APP_ENV: dev
     volumes:
       - ./symfony/:/var/www/symfony
+    networks:
+      - default
+
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql:/var/lib/mysql
     networks:
       - default
 
